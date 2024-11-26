@@ -2,54 +2,130 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import logico.Comision;
+import logico.GestionEvento;
+
+import javax.swing.border.BevelBorder;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ListarComisiones extends JDialog {
 
-	private final JPanel contentPanel = new JPanel();
+    private final JPanel contentPanel = new JPanel();
+    private static DefaultTableModel modelo;
+    private static Object[] row;
+    private JScrollPane scrollPane;
+    private static JTable table;
+    private JButton btnEliminar;
+    private JButton btnModificar;
+    private Comision comisionSeleccionada = null;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			ListarComisiones dialog = new ListarComisiones();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    public ListarComisiones() {
+        setBounds(100, 100, 725, 455);
+        getContentPane().setLayout(new BorderLayout());
+        contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        getContentPane().add(contentPanel, BorderLayout.CENTER);
+        contentPanel.setLayout(new BorderLayout(0, 0));
 
-	/**
-	 * Create the dialog.
-	 */
-	public ListarComisiones() {
-		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
-	}
+        // Panel para la tabla
+        JPanel panel = new JPanel();
+        contentPanel.add(panel, BorderLayout.CENTER);
+        panel.setLayout(new BorderLayout(0, 0));
 
+        scrollPane = new JScrollPane();
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        table = new JTable();
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int index = table.getSelectedRow();
+                if (index >= 0) {
+                    btnEliminar.setEnabled(true);
+                    btnModificar.setEnabled(true);
+                    String idComision = (String) table.getValueAt(index, 0);
+                    comisionSeleccionada = GestionEvento.getInstance().buscarComisionPorId(idComision);
+                }
+            }
+        });
+
+        modelo = new DefaultTableModel();
+        String[] headers = { "ID", "Nombre", "Área", "Jurados", "Trabajos Evaluar" };
+        modelo.setColumnIdentifiers(headers);
+        table.setModel(modelo);
+        scrollPane.setViewportView(table);
+
+        // Panel de botones
+        JPanel buttonPane = new JPanel();
+        buttonPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+        buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        getContentPane().add(buttonPane, BorderLayout.SOUTH);
+
+        btnModificar = new JButton("Modificar");
+        btnModificar.setEnabled(false);
+        btnModificar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (comisionSeleccionada != null) {
+                    RegistrarComision modificar = new RegistrarComision(comisionSeleccionada);
+                    modificar.setModal(true);
+                    modificar.setVisible(true);
+                    loadComisiones();
+                }
+            }
+        });
+        buttonPane.add(btnModificar);
+
+        btnEliminar = new JButton("Eliminar");
+        btnEliminar.setEnabled(false);
+        btnEliminar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (comisionSeleccionada != null) {
+                    int option = JOptionPane.showConfirmDialog(null,
+                            "¿Está seguro de eliminar la comisión con ID: " + comisionSeleccionada.getIdComision() + "?",
+                            "Confirmación", JOptionPane.OK_CANCEL_OPTION);
+                    if (option == JOptionPane.OK_OPTION) {
+                        GestionEvento.getInstance().getMisComisiones().remove(comisionSeleccionada);
+                        btnEliminar.setEnabled(false);
+                        btnModificar.setEnabled(false);
+                        loadComisiones();
+                    }
+                }
+            }
+        });
+        buttonPane.add(btnEliminar);
+
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        buttonPane.add(btnCancelar);
+
+        loadComisiones();
+    }
+
+    public static void loadComisiones() {
+        modelo.setRowCount(0); // Limpia la tabla
+        row = new Object[table.getColumnCount()]; // Ajusta el tamaño de la fila
+        for (Comision comision : GestionEvento.getInstance().getMisComisiones()) {
+            row[0] = comision.getIdComision();
+            row[1] = comision.getNombreComision();
+            row[2] = comision.getArea();
+            row[3] = comision.getJuradoComision().size(); // Número de jurados
+            row[4] = comision.getTrabajosEvaluar().size(); // Número de trabajos
+            modelo.addRow(row);
+        }
+    }
 }

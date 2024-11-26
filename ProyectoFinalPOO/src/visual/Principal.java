@@ -100,14 +100,14 @@ public class Principal extends JFrame {
         JMenuItem itemRegistrarJurado = new JMenuItem("Registrar");
         itemRegistrarJurado.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
-                RegistrarJurado registrar = new RegistrarJurado();
+                RegistrarJurado registrar = new RegistrarJurado(null); 
                 registrar.setModal(true);
                 registrar.setLocationRelativeTo(null);
                 registrar.setVisible(true);
             }
         });
         menuJurados.add(itemRegistrarJurado);
+
 
         JMenuItem itemListadoJurados = new JMenuItem("Listado");
         itemListadoJurados.addActionListener(new ActionListener() {
@@ -128,8 +128,7 @@ public class Principal extends JFrame {
         JMenuItem itemRegistrarComision = new JMenuItem("Registrar");
         itemRegistrarComision.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            
-                RegistrarComision registrar = new RegistrarComision();
+                RegistrarComision registrar = new RegistrarComision(null); 
                 registrar.setModal(true);
                 registrar.setLocationRelativeTo(null);
                 registrar.setVisible(true);

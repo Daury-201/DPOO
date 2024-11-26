@@ -84,5 +84,29 @@ public class GestionEvento {
      }
      return null;
   }
+
+public void agregarPersona(Persona persona) {
+    if (!misPersonas.contains(persona)) {
+        misPersonas.add(persona);
+    }
 }
 
+public void agregarComision(Comision comision) {
+    if (!misComisiones.contains(comision)) {
+        misComisiones.add(comision);
+    }
+}
+public ArrayList<Jurado> getJurados() {
+    ArrayList<Jurado> jurados = new ArrayList<>();
+    for (Persona persona : misPersonas) {
+        if (persona instanceof Jurado) {
+            jurados.add((Jurado) persona);
+        }
+    }
+    return jurados;
+}
+public void eliminarJurado(Jurado jurado) {
+    misPersonas.remove(jurado);
+}
+
+}
