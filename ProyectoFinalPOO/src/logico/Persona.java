@@ -6,6 +6,7 @@ public abstract class Persona {
 	protected String apellido;
 	protected String telefono;
 	protected String direccion;
+	protected String profesion;
 	
 	public Persona(String id, String nombre, String apellido, String telefono, String direccion) {
 		super();
@@ -54,5 +55,13 @@ public abstract class Persona {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+
+	public String getProfesion() {
+		return profesion;
+	}
+
+	public void setProfesion(String profesion) {
+		this.profesion = profesion;
 	}
 }
