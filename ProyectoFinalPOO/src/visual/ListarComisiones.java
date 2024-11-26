@@ -8,13 +8,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
 import logico.Comision;
 import logico.GestionEvento;
-
 import javax.swing.border.BevelBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
@@ -32,13 +31,14 @@ public class ListarComisiones extends JDialog {
     private Comision comisionSeleccionada = null;
 
     public ListarComisiones() {
-        setBounds(100, 100, 725, 455);
+        
+        setBounds(100, 100, 639, 477); 
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(new BorderLayout(0, 0));
 
-        // Panel para la tabla
+        
         JPanel panel = new JPanel();
         contentPanel.add(panel, BorderLayout.CENTER);
         panel.setLayout(new BorderLayout(0, 0));
@@ -64,9 +64,12 @@ public class ListarComisiones extends JDialog {
         String[] headers = { "ID", "Nombre", "Área", "Jurados", "Trabajos Evaluar" };
         modelo.setColumnIdentifiers(headers);
         table.setModel(modelo);
+
+        
+        scrollPane.setPreferredSize(new Dimension(950, 300));
         scrollPane.setViewportView(table);
 
-        // Panel de botones
+       
         JPanel buttonPane = new JPanel();
         buttonPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
         buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -117,14 +120,14 @@ public class ListarComisiones extends JDialog {
     }
 
     public static void loadComisiones() {
-        modelo.setRowCount(0); // Limpia la tabla
-        row = new Object[table.getColumnCount()]; // Ajusta el tamaño de la fila
+        modelo.setRowCount(0); 
+        row = new Object[table.getColumnCount()]; 
         for (Comision comision : GestionEvento.getInstance().getMisComisiones()) {
             row[0] = comision.getIdComision();
             row[1] = comision.getNombreComision();
             row[2] = comision.getArea();
-            row[3] = comision.getJuradoComision().size(); // Número de jurados
-            row[4] = comision.getTrabajosEvaluar().size(); // Número de trabajos
+            row[3] = comision.getJuradoComision().size(); 
+            row[4] = comision.getTrabajosEvaluar().size(); 
             modelo.addRow(row);
         }
     }

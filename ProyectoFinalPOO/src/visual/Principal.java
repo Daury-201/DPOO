@@ -44,8 +44,7 @@ public class Principal extends JFrame {
         JMenuItem itemRegistrarParticipante = new JMenuItem("Registrar");
         itemRegistrarParticipante.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
-                RegistrarParticipante registrar = new RegistrarParticipante();
+                RegistrarParticipante registrar = new RegistrarParticipante(null); 
                 registrar.setModal(true);
                 registrar.setLocationRelativeTo(null);
                 registrar.setVisible(true);
@@ -72,8 +71,7 @@ public class Principal extends JFrame {
         JMenuItem itemRegistrarTrabajo = new JMenuItem("Registrar");
         itemRegistrarTrabajo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
-                RegistrarTrabajo registrar = new RegistrarTrabajo();
+                RegistrarTrabajo registrar = new RegistrarTrabajo(null); 
                 registrar.setModal(true);
                 registrar.setLocationRelativeTo(null);
                 registrar.setVisible(true);
