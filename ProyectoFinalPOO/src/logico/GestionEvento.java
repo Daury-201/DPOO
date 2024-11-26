@@ -76,6 +76,15 @@ public class GestionEvento {
      }
      return null;
  }
+ public Participante buscarParticipantePorId(String id) {
+     for (Persona persona : misPersonas) {
+         if (persona instanceof Participante && persona.getId().equalsIgnoreCase(id)) {
+             return (Participante) persona;
+         }
+     }
+     return null;
+ }
+
  public TrabajoCientifico buscarTrabajoPorId(String id) {
      for (TrabajoCientifico trabajo : misTrabajos) {
          if (trabajo.getId().equalsIgnoreCase(id)) {
@@ -85,21 +94,21 @@ public class GestionEvento {
      return null;
   }
 
- public void agregarPersona(Persona persona) {
-	    for (Persona p : misPersonas) {
-	        if (p.getId().equalsIgnoreCase(persona.getId())) {
-	            return; 
-	        }
-	    }
-	    misPersonas.add(persona);
-	}
-
+public void agregarPersona(Persona persona) {
+    if (!misPersonas.contains(persona)) {
+        misPersonas.add(persona);
+    }
+}
 
 public void agregarComision(Comision comision) {
     if (!misComisiones.contains(comision)) {
         misComisiones.add(comision);
     }
 }
+public void eliminarComision(Comision comision) {
+    misComisiones.remove(comision);
+}
+
 public ArrayList<Jurado> getJurados() {
     ArrayList<Jurado> jurados = new ArrayList<>();
     for (Persona persona : misPersonas) {
@@ -109,8 +118,26 @@ public ArrayList<Jurado> getJurados() {
     }
     return jurados;
 }
+
+public ArrayList<Participante> getParticipantes() {
+    ArrayList<Participante> participantes = new ArrayList<>();
+    for (Persona persona : misPersonas) {
+        if (persona instanceof Participante) {
+            participantes.add((Participante) persona);
+        }
+    }
+    return participantes;
+}
 public void eliminarJurado(Jurado jurado) {
     misPersonas.remove(jurado);
+}
+public void agregarTrabajo(TrabajoCientifico trabajo) {
+    if (!misTrabajos.contains(trabajo)) {
+        misTrabajos.add(trabajo);
+    }
+}
+public void eliminarTrabajo(TrabajoCientifico trabajo) {
+    misTrabajos.remove(trabajo);
 }
 
 }
