@@ -85,11 +85,15 @@ public class GestionEvento {
      return null;
   }
 
-public void agregarPersona(Persona persona) {
-    if (!misPersonas.contains(persona)) {
-        misPersonas.add(persona);
-    }
-}
+ public void agregarPersona(Persona persona) {
+	    for (Persona p : misPersonas) {
+	        if (p.getId().equalsIgnoreCase(persona.getId())) {
+	            return; 
+	        }
+	    }
+	    misPersonas.add(persona);
+	}
+
 
 public void agregarComision(Comision comision) {
     if (!misComisiones.contains(comision)) {

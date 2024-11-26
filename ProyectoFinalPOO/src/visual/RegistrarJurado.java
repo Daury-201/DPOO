@@ -132,21 +132,33 @@ public class RegistrarJurado extends JDialog {
         }
     }
 
-    
     private void guardarJurado() {
-        String id = txtId.getText();
-        String nombre = txtNombre.getText();
-        String apellido = txtApellido.getText();
-        String telefono = txtTelefono.getText();
-        String direccion = txtDireccion.getText();
+        String id = txtId.getText().trim(); 
+        String nombre = txtNombre.getText().trim();
+        String apellido = txtApellido.getText().trim();
+        String telefono = txtTelefono.getText().trim();
+        String direccion = txtDireccion.getText().trim();
 
+      
+        if (id.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || direccion.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+
+       
         if (juradoSeleccionado == null) {
+            
+            if (GestionEvento.getInstance().buscarJuradoPorId(id) != null) {
+                JOptionPane.showMessageDialog(this, "Ya existe un jurado con este ID.", "Error", JOptionPane.ERROR_MESSAGE);
+                return; 
+            }
+
             
             Jurado nuevoJurado = new Jurado(id, nombre, apellido, telefono, direccion);
             GestionEvento.getInstance().agregarPersona(nuevoJurado);
             JOptionPane.showMessageDialog(this, "Jurado registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
-           
+            
             juradoSeleccionado.setNombre(nombre);
             juradoSeleccionado.setApellido(apellido);
             juradoSeleccionado.setTelefono(telefono);
@@ -155,4 +167,6 @@ public class RegistrarJurado extends JDialog {
         }
         dispose();
     }
+
+    
 }
