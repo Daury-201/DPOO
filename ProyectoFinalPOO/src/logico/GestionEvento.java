@@ -59,4 +59,30 @@ public class GestionEvento {
 	public void setMisTrabajos(ArrayList<TrabajoCientifico> misTrabajos) {
 		this.misTrabajos = misTrabajos;
 	}
+
+ public Comision buscarComisionPorId(String id) {
+    for (Comision comision : misComisiones) {
+        if (comision.getIdComision().equalsIgnoreCase(id)) {
+            return comision;
+        }
+    }
+    return null;
 }
+ public Jurado buscarJuradoPorId(String id) {
+     for (Persona persona : misPersonas) {
+         if (persona instanceof Jurado && persona.getId().equalsIgnoreCase(id)) {
+             return (Jurado) persona;
+         }
+     }
+     return null;
+ }
+ public TrabajoCientifico buscarTrabajoPorId(String id) {
+     for (TrabajoCientifico trabajo : misTrabajos) {
+         if (trabajo.getId().equalsIgnoreCase(id)) {
+             return trabajo;
+         }
+     }
+     return null;
+  }
+}
+
