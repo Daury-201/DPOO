@@ -8,13 +8,14 @@ public abstract class Persona {
 	protected String direccion;
 	protected String profesion;
 	
-	public Persona(String id, String nombre, String apellido, String telefono, String direccion) {
+	public Persona(String id, String nombre, String apellido, String telefono, String direccion, String profesion) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
 		this.direccion = direccion;
+		this.profesion = profesion;
 	}
 
 	public String getId() {

@@ -18,7 +18,7 @@ public class Comision {
         this.trabajosEvaluar = new ArrayList<>();
     }
 
-    // Getters y Setters
+    
     public String getIdComision() {
         return idComision;
     }
