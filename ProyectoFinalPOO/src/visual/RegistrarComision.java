@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 import logico.Comision;
 import logico.GestionEvento;
 import logico.Jurado;
+import logico.Participante;
 import logico.TrabajoCientifico;
 
 public class RegistrarComision extends JDialog {
@@ -34,7 +36,7 @@ public class RegistrarComision extends JDialog {
     private Comision comisionSeleccionada;
     private JTextField txtIdComision;
     private JTextField txtNombreComision;
-    private JTextField txtArea;
+    private JComboBox<String> comboArea; 
 
     public RegistrarComision(Comision comisionSeleccionada) {
         this.comisionSeleccionada = comisionSeleccionada;
@@ -65,9 +67,9 @@ public class RegistrarComision extends JDialog {
         lblArea.setBounds(10, 70, 100, 20);
         contentPanel.add(lblArea);
 
-        txtArea = new JTextField();
-        txtArea.setBounds(120, 70, 200, 20);
-        contentPanel.add(txtArea);
+        comboArea = new JComboBox<>();
+        comboArea.setBounds(120, 70, 200, 20);
+        contentPanel.add(comboArea);
 
         
         JScrollPane scrollPaneJurados = new JScrollPane();
@@ -159,6 +161,7 @@ public class RegistrarComision extends JDialog {
         buttonPane.add(btnCancelar);
 
         cargarJurados();
+        cargarAreas();
         cargarTrabajos();
         cargarDatosComision();
     }
@@ -168,6 +171,22 @@ public class RegistrarComision extends JDialog {
         for (Jurado jurado : GestionEvento.getInstance().getJurados()) {
             Object[] row = { jurado.getId(), jurado.getNombre(), jurado.getApellido(), jurado.getTelefono() };
             modeloJurados.addRow(row);
+        }
+    }
+    
+    private void cargarAreas() {
+        comboArea.removeAllItems();  
+        ArrayList<String> areas = new ArrayList<>();
+        
+ 
+        for (TrabajoCientifico trabajo : GestionEvento.getInstance().getMisTrabajos()) {
+            String area = trabajo.getArea();
+            if (!areas.contains(area)) { 
+                areas.add(area);
+            }
+        }
+        for (String area : areas) {
+            comboArea.addItem(area);
         }
     }
 
@@ -184,7 +203,8 @@ public class RegistrarComision extends JDialog {
             txtIdComision.setText(comisionSeleccionada.getIdComision());
             txtIdComision.setEditable(false);
             txtNombreComision.setText(comisionSeleccionada.getNombreComision());
-            txtArea.setText(comisionSeleccionada.getArea());
+            String areaSeleccionada = comisionSeleccionada.getArea();
+            comboArea.setSelectedItem(areaSeleccionada);
 
             for (Jurado jurado : comisionSeleccionada.getJuradoComision()) {
                 juradosSeleccionados.add(jurado);
@@ -273,8 +293,8 @@ public class RegistrarComision extends JDialog {
     private void guardarComision() {
         String id = txtIdComision.getText().trim();
         String nombre = txtNombreComision.getText().trim();
-        String area = txtArea.getText().trim();
-
+        String area = (String) comboArea.getSelectedItem();
+    
         
         if (id.isEmpty() || nombre.isEmpty() || area.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);

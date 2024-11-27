@@ -99,7 +99,7 @@ public class RegistrarParticipante extends JDialog {
         lblRol.setBounds(12, 200, 100, 20);
         contentPanel.add(lblRol);
 
-        comboRol = new JComboBox<>(new String[] { "Autor", "Coautor", "Otro" });
+        comboRol = new JComboBox<>(new String[] { "Autor", "Otro" });
         comboRol.setBounds(120, 200, 150, 20);
         contentPanel.add(comboRol);
 

@@ -80,6 +80,7 @@ public class ListarTrabajos extends JDialog {
         btnModificarEstado.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (trabajoSeleccionado != null) {
+                    modificarEstado();
                     loadTrabajos();
                 }
             }
@@ -132,6 +133,21 @@ public class ListarTrabajos extends JDialog {
         loadTrabajos();
     }
 
+    private void modificarEstado() {
+        String[] opciones = { "En revisión", "Aceptado", "Rechazado" };
+        String nuevoEstado = (String) JOptionPane.showInputDialog(this, 
+                "Seleccione el nuevo estado del trabajo:",
+                "Modificar Estado",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                opciones,
+                trabajoSeleccionado.getEstado());
+
+        if (nuevoEstado != null && !nuevoEstado.equals(trabajoSeleccionado.getEstado())) {
+            trabajoSeleccionado.setEstado(nuevoEstado);
+            JOptionPane.showMessageDialog(this, "Estado modificado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 
     public static void loadTrabajos() {
         modelo.setRowCount(0); 
@@ -141,6 +157,7 @@ public class ListarTrabajos extends JDialog {
             row[1] = trabajo.getNombre(); 
             row[2] = trabajo.getArea(); 
             row[3] = trabajo.getAutor().getNombre() + " " + trabajo.getAutor().getApellido(); 
+            row[4] = trabajo.getEstado(); 
             modelo.addRow(row);
         }
     }

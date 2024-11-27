@@ -6,6 +6,7 @@ public class TrabajoCientifico {
 	private String nombre;
 	private String area;
 	private Participante autor;
+	private String estado;
 	
 	public TrabajoCientifico(String id, String nombre, String area, Participante autor) {
 		super();
@@ -37,6 +38,12 @@ public class TrabajoCientifico {
 	}
 	public void setAutor(Participante autor) {
 		this.autor = autor;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
   }
 
