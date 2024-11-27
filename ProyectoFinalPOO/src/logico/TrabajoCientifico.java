@@ -38,4 +38,6 @@ public class TrabajoCientifico {
 	public void setAutor(Participante autor) {
 		this.autor = autor;
 	}
-}
+  }
+
+
