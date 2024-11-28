@@ -6,16 +6,16 @@ public abstract class Persona {
 	protected String apellido;
 	protected String telefono;
 	protected String direccion;
-	protected String profesion;
 	
-	public Persona(String id, String nombre, String apellido, String telefono, String direccion, String profesion) {
+	
+	public Persona(String id, String nombre, String apellido, String telefono, String direccion) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
 		this.direccion = direccion;
-		this.profesion = profesion;
+		
 	}
 
 	public String getId() {
@@ -57,12 +57,7 @@ public abstract class Persona {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-
-	public String getProfesion() {
-		return profesion;
-	}
-
-	public void setProfesion(String profesion) {
-		this.profesion = profesion;
-	}
+	
 }
+
+	
