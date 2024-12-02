@@ -40,7 +40,7 @@ public class RegistrarComision extends JDialog {
 
     public RegistrarComision(Comision comisionSeleccionada) {
         this.comisionSeleccionada = comisionSeleccionada;
-        setBounds(100, 100, 1000, 650);
+        setBounds(100, 100, 905, 650);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);

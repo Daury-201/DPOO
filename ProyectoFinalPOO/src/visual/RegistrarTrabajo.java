@@ -32,7 +32,7 @@ public class RegistrarTrabajo extends JDialog {
         } else {
             setTitle("Modificar Trabajo Científico");
         }
-        setBounds(100, 100, 600, 500);
+        setBounds(100, 100, 518, 229);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setModal(true);
         setLocationRelativeTo(null);

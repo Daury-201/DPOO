@@ -12,6 +12,7 @@ import logico.Participante;
 import javax.swing.border.BevelBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -25,8 +26,8 @@ public class RegistrarParticipante extends JDialog {
     private JTextField txtTelefono;
     private JTextField txtDireccion;
     private JTextField txtEmail;
-    private JTextField txtRolOtro; 
-    private JComboBox<String> comboRol; 
+    private JTextField txtRolOtro;
+    private JComboBox<String> comboRol;
     private Participante participanteSeleccionado;
 
     public RegistrarParticipante(Participante participanteSeleccionado) {
@@ -37,7 +38,7 @@ public class RegistrarParticipante extends JDialog {
         } else {
             setTitle("Modificar Participante");
         }
-        setBounds(100, 100, 500, 400);
+        setBounds(100, 100, 500, 322);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setModal(true);
         setLocationRelativeTo(null);
@@ -99,7 +100,8 @@ public class RegistrarParticipante extends JDialog {
         lblRol.setBounds(12, 200, 100, 20);
         contentPanel.add(lblRol);
 
-        comboRol = new JComboBox<>(new String[] { "Autor", "Otro" });
+        comboRol = new JComboBox<>();
+        comboRol.setModel(new DefaultComboBoxModel<>(new String[] { "Autor", "Otro" }));
         comboRol.setBounds(120, 200, 150, 20);
         contentPanel.add(comboRol);
 
@@ -161,7 +163,7 @@ public class RegistrarParticipante extends JDialog {
     }
 
     private void guardarParticipante() {
-        String id = txtId.getText().trim(); 
+        String id = txtId.getText().trim();
         String nombre = txtNombre.getText().trim();
         String apellido = txtApellido.getText().trim();
         String telefono = txtTelefono.getText().trim();

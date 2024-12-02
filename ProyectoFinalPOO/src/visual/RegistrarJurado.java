@@ -35,7 +35,7 @@ public class RegistrarJurado extends JDialog {
         } else {
             setTitle("Modificar Jurado");
         }
-        setBounds(100, 100, 450, 300);
+        setBounds(100, 100, 450, 258);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setModal(true);
         setLocationRelativeTo(null);
