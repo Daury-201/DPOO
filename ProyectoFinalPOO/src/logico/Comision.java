@@ -1,10 +1,16 @@
 package logico;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Comision {
 
-    private String idComision;
+public class Comision implements Serializable {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String idComision;
     private String nombreComision;
     private String area;
     private ArrayList<Jurado> juradoComision;

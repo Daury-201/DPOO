@@ -2,9 +2,14 @@ package logico;
 
 import java.util.ArrayList;
 
+
 public class Jurado extends Persona {
 
-    private ArrayList<Comision> comisiones;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ArrayList<Comision> comisiones;
 
     public Jurado(String id, String nombre, String apellido, String telefono, String direccion) {
         super(id, nombre, apellido, telefono, direccion);

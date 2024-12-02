@@ -1,7 +1,15 @@
 package logico;
 
-public class TrabajoCientifico {
 
+import java.io.Serializable;
+
+
+public class TrabajoCientifico implements Serializable {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String nombre;
 	private String area;
