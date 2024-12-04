@@ -56,7 +56,7 @@ public class Principal extends JFrame {
         itemListadoParticipantes.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
-                ListarParticipantes listar = new ListarParticipantes();
+                ListarParticipante listar = new ListarParticipante();
                 listar.setModal(true);
                 listar.setLocationRelativeTo(null);
                 listar.setVisible(true);
@@ -138,7 +138,7 @@ public class Principal extends JFrame {
         itemListadoComisiones.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                
-                ListarComisiones listar = new ListarComisiones();
+                ListarComision listar = new ListarComision();
                 listar.setModal(true);
                 listar.setLocationRelativeTo(null);
                 listar.setVisible(true);
@@ -163,20 +163,23 @@ public class Principal extends JFrame {
         menuRecursos.add(itemGestionarRecursos);
 
         
-        JMenu menuPlanificacion = new JMenu("Planificación");
+        JMenu menuPlanificacion = new JMenu("Eventos");
         menuBar.add(menuPlanificacion);
 
-        JMenuItem itemPlanificarEvento = new JMenuItem("Planificar Evento");
+        JMenuItem itemPlanificarEvento = new JMenuItem("Registrar Evento");
         itemPlanificarEvento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
-                PlanificarEvento planificar = new PlanificarEvento();
-                planificar.setModal(true);
-                planificar.setLocationRelativeTo(null);
-                planificar.setVisible(true);
+                RegistrarEvento regEvento = new RegistrarEvento();
+                regEvento.setModal(true);
+                regEvento.setLocationRelativeTo(null);
+                regEvento.setVisible(true);
             }
         });
         menuPlanificacion.add(itemPlanificarEvento);
+        
+        JMenuItem mntmNewMenuItem = new JMenuItem("Lista de Eventos");
+        menuPlanificacion.add(mntmNewMenuItem);
 
       
         JMenu menuReportes = new JMenu("Reportes y Consultas");
