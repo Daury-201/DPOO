@@ -123,7 +123,7 @@ public class ListarEvento extends JDialog {
         for (Evento evento : GestionEvento.getInstance().getMisEventos()) {
                 row[0] = evento.getIdEvento();
                 row[1] = evento.getNombre();
-                row[2] = evento.getNombre();
+                row[2] = evento.getTipo();
                 row[3] = evento.getFechaInicio();
                 row[4] = evento.getFechaFin();
                 modelo.addRow(row);

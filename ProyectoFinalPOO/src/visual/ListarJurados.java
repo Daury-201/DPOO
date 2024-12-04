@@ -98,6 +98,7 @@ public class ListarJurados extends JDialog {
                             "Confirmación", JOptionPane.OK_CANCEL_OPTION);
                     if (option == JOptionPane.OK_OPTION) {
                         GestionEvento.getInstance().getMisPersonas().remove(juradoSeleccionado);
+                        GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
                         btnEliminar.setEnabled(false);
                         btnModificar.setEnabled(false);
                         loadJurados();

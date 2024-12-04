@@ -328,6 +328,8 @@ public class RegistrarComision extends JDialog {
             comisionSeleccionada.setTrabajosEvaluar(trabajosSeleccionados);
             JOptionPane.showMessageDialog(this, "Comisión actualizada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }
+        
+        GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
 
         dispose();
     }

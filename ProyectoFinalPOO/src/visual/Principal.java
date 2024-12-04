@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logico.GestionEvento;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -17,6 +20,7 @@ public class Principal extends JFrame {
     private JPanel contentPane;
 
     public static void main(String[] args) {
+    	GestionEvento.cargarDatos("gestionEvento.dat");
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -33,7 +37,14 @@ public class Principal extends JFrame {
         setTitle("Sistema de Gestión de Eventos Científicos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 782, 499);
-
+        
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
+            }
+        });
+        
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 

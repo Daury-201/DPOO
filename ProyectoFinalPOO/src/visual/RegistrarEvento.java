@@ -198,6 +198,7 @@ public class RegistrarEvento extends JDialog {
 			       
 			        Evento nuevoEvento = new Evento(id, nombre, tipo, fechaInicio, fechaFin);
 			        GestionEvento.getInstance().agregarEvento(nuevoEvento);
+			        GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
 			        JOptionPane.showMessageDialog(this, "Evento registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 			    } else {
 			   
@@ -205,9 +206,10 @@ public class RegistrarEvento extends JDialog {
 			        eventoSeleccionado.setTipo(tipo);
 			        eventoSeleccionado.setFechaInicio(fechaInicio);
 			        eventoSeleccionado.setFechaFin(fechaFin);
+			        GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
 			        JOptionPane.showMessageDialog(this, "Evento modificado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 			    }
-
+                  
 			  
 			    dispose();
 			}

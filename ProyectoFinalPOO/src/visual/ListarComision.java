@@ -77,32 +77,30 @@ public class ListarComision extends JDialog {
 
         btnModificar = new JButton("Modificar");
         btnModificar.setEnabled(false);
-        btnModificar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (comisionSeleccionada != null) {
-                    RegistrarComision modificar = new RegistrarComision(comisionSeleccionada);
-                    modificar.setModal(true);
-                    modificar.setVisible(true);
-                    loadComisiones();
-                }
+        btnModificar.addActionListener(e -> {
+            if (comisionSeleccionada != null) {
+                RegistrarComision modificar = new RegistrarComision(comisionSeleccionada);
+                modificar.setModal(true);
+                modificar.setVisible(true);
+                GestionEvento.getInstance().guardarDatos("gestionEvento.dat"); 
+                loadComisiones();
             }
         });
         buttonPane.add(btnModificar);
 
         btnEliminar = new JButton("Eliminar");
         btnEliminar.setEnabled(false);
-        btnEliminar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (comisionSeleccionada != null) {
-                    int option = JOptionPane.showConfirmDialog(null,
-                            "¿Está seguro de eliminar la comisión con ID: " + comisionSeleccionada.getIdComision() + "?",
-                            "Confirmación", JOptionPane.OK_CANCEL_OPTION);
-                    if (option == JOptionPane.OK_OPTION) {
-                        GestionEvento.getInstance().getMisComisiones().remove(comisionSeleccionada);
-                        btnEliminar.setEnabled(false);
-                        btnModificar.setEnabled(false);
-                        loadComisiones();
-                    }
+        btnEliminar.addActionListener(e -> {
+            if (comisionSeleccionada != null) {
+                int option = JOptionPane.showConfirmDialog(null,
+                        "¿Está seguro de eliminar la comisión con ID: " + comisionSeleccionada.getIdComision() + "?",
+                        "Confirmación", JOptionPane.OK_CANCEL_OPTION);
+                if (option == JOptionPane.OK_OPTION) {
+                    GestionEvento.getInstance().eliminarComision(comisionSeleccionada);
+                    GestionEvento.getInstance().guardarDatos("gestionEvento.dat"); 
+                    btnEliminar.setEnabled(false);
+                    btnModificar.setEnabled(false);
+                    loadComisiones();
                 }
             }
         });

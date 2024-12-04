@@ -156,6 +156,7 @@ public class RegistrarJurado extends JDialog {
             
             Jurado nuevoJurado = new Jurado(id, nombre, apellido, telefono, direccion);
             GestionEvento.getInstance().agregarPersona(nuevoJurado);
+            GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
             JOptionPane.showMessageDialog(this, "Jurado registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
             
@@ -163,6 +164,7 @@ public class RegistrarJurado extends JDialog {
             juradoSeleccionado.setApellido(apellido);
             juradoSeleccionado.setTelefono(telefono);
             juradoSeleccionado.setDireccion(direccion);
+            GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
             JOptionPane.showMessageDialog(this, "Jurado modificado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }
         dispose();
