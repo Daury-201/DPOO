@@ -170,7 +170,7 @@ public class Principal extends JFrame {
         itemPlanificarEvento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
-                RegistrarEvento regEvento = new RegistrarEvento();
+                RegistrarEvento regEvento = new RegistrarEvento(null);
                 regEvento.setModal(true);
                 regEvento.setLocationRelativeTo(null);
                 regEvento.setVisible(true);
@@ -179,6 +179,15 @@ public class Principal extends JFrame {
         menuPlanificacion.add(itemPlanificarEvento);
         
         JMenuItem mntmNewMenuItem = new JMenuItem("Lista de Eventos");
+        mntmNewMenuItem.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		ListarEvento list = new ListarEvento();
+        		list.setModal(true);
+        		list.setLocationRelativeTo(null);
+        		list.setVisible(true);
+        		
+        	}
+        });
         menuPlanificacion.add(mntmNewMenuItem);
 
       

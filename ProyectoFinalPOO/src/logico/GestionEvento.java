@@ -207,4 +207,25 @@ public class GestionEvento implements Serializable {
     public void eliminarTrabajo(TrabajoCientifico trabajo) {
         misTrabajos.remove(trabajo);
     }
+    
+    public Evento buscarEventoPorId(String id) {
+        for (Evento evento : misEventos) {
+            if (evento.getIdEvento().equalsIgnoreCase(id)) {
+                return evento;
+            }
+        }
+        return null;
+    }
+    
+    public void agregarEvento(Evento evento) {
+        if (!misEventos.contains(evento)) {
+            misEventos.add(evento);
+        }
+    }
+    
+    public void insertarEvento(Evento s1) {
+        misEventos.add(s1);
+       codEvento++;
+    }
+
 }
