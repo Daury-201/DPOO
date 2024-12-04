@@ -123,12 +123,14 @@ public class RegistrarTrabajo extends JDialog {
         if (trabajoSeleccionado == null) {
             trabajoSeleccionado = new TrabajoCientifico(id, nombre, area, autor);
             GestionEvento.getInstance().agregarTrabajo(trabajoSeleccionado);
+            GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
             JOptionPane.showMessageDialog(this, "Trabajo registrado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
 
             trabajoSeleccionado.setNombre(nombre);
             trabajoSeleccionado.setArea(area);
             trabajoSeleccionado.setAutor(autor);
+            GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
             JOptionPane.showMessageDialog(this, "Trabajo modificado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }
 

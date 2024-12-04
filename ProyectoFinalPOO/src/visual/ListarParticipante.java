@@ -100,6 +100,8 @@ public class ListarParticipante extends JDialog {
                         btnEliminar.setEnabled(false);
                         btnModificar.setEnabled(false);
                         loadParticipantes();
+                        
+                        GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
                     }
                 }
             }

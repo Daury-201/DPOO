@@ -194,6 +194,7 @@ public class RegistrarParticipante extends JDialog {
             participanteSeleccionado.setRol(rol);
             JOptionPane.showMessageDialog(this, "Participante modificado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }
+        GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
         dispose();
     }
 }

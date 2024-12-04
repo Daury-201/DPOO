@@ -112,6 +112,7 @@ public class ListarTrabajos extends JDialog {
                             "Confirmación", JOptionPane.OK_CANCEL_OPTION);
                     if (option == JOptionPane.OK_OPTION) {
                         GestionEvento.getInstance().getMisTrabajos().remove(trabajoSeleccionado);
+                        GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
                         btnEliminar.setEnabled(false);
                         btnModificarEstado.setEnabled(false);
                         btnModificarDatos.setEnabled(false); 
@@ -145,6 +146,7 @@ public class ListarTrabajos extends JDialog {
 
         if (nuevoEstado != null && !nuevoEstado.equals(trabajoSeleccionado.getEstado())) {
             trabajoSeleccionado.setEstado(nuevoEstado);
+            GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
             JOptionPane.showMessageDialog(this, "Estado modificado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }
     }
