@@ -11,7 +11,6 @@ import javax.swing.table.DefaultTableModel;
 
 import logico.GestionEvento;
 import logico.Evento;
-import logico.Persona;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.JScrollPane;
@@ -35,13 +34,12 @@ public class ListarEvento extends JDialog {
     private JButton btnNewButton_1;
 
     public ListarEvento() {
-        setBounds(100, 100, 725, 455);
+        setBounds(100, 100, 800, 455); 
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(new BorderLayout(0, 0));
 
-       
         JPanel panel = new JPanel();
         contentPanel.add(panel, BorderLayout.CENTER);
         panel.setLayout(new BorderLayout(0, 0));
@@ -58,18 +56,17 @@ public class ListarEvento extends JDialog {
                     btnEliminar.setEnabled(true);
                     btnModificar.setEnabled(true);
                     String idEvento = (String) table.getValueAt(index, 0);
-                   eventoSeleccionado = (Evento) GestionEvento.getInstance().buscarEventoPorId(idEvento);
+                    eventoSeleccionado = GestionEvento.getInstance().buscarEventoPorId(idEvento);
                 }
             }
         });
 
         modelo = new DefaultTableModel();
-        String[] headers = { "ID", "Nombre", "Tipo", "Fecha Inicio", "Fecha Fin" };
+        String[] headers = { "ID", "Nombre", "Tipo General", "Tipo Específico", "Fecha Inicio", "Fecha Fin" };
         modelo.setColumnIdentifiers(headers);
         table.setModel(modelo);
         scrollPane.setViewportView(table);
 
-       
         JPanel buttonPane = new JPanel();
         buttonPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
         buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -87,8 +84,8 @@ public class ListarEvento extends JDialog {
                 }
             }
         });
-        
-        btnNewButton = new JButton(" Comisiones");
+
+        btnNewButton = new JButton("Comisiones");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (eventoSeleccionado != null) {
@@ -101,7 +98,7 @@ public class ListarEvento extends JDialog {
             }
         });
         buttonPane.add(btnNewButton);
-        
+
         btnNewButton_1 = new JButton("Trabajos");
         btnNewButton_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -121,9 +118,9 @@ public class ListarEvento extends JDialog {
         btnEliminar.setEnabled(false);
         btnEliminar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (eventoSeleccionado!= null) {
+                if (eventoSeleccionado != null) {
                     int option = JOptionPane.showConfirmDialog(null,
-                            "¿Está seguro de eliminar al evento con ID: " + eventoSeleccionado.getIdEvento() + "?",
+                            "¿Está seguro de eliminar el evento con ID: " + eventoSeleccionado.getIdEvento() + "?",
                             "Confirmación", JOptionPane.OK_CANCEL_OPTION);
                     if (option == JOptionPane.OK_OPTION) {
                         GestionEvento.getInstance().getMisEventos().remove(eventoSeleccionado);
@@ -151,12 +148,13 @@ public class ListarEvento extends JDialog {
         modelo.setRowCount(0); 
         row = new Object[table.getColumnCount()]; 
         for (Evento evento : GestionEvento.getInstance().getMisEventos()) {
-                row[0] = evento.getIdEvento();
-                row[1] = evento.getNombre();
-                row[2] = evento.getTipo();
-                row[3] = evento.getFechaInicio();
-                row[4] = evento.getFechaFin();
-                modelo.addRow(row);
-            }
+            row[0] = evento.getIdEvento();
+            row[1] = evento.getNombre();
+            row[2] = evento.getTipo();
+            row[3] = evento.getTipoEvento(); 
+            row[4] = evento.getFechaInicio();
+            row[5] = evento.getFechaFin();
+            modelo.addRow(row);
         }
+    }
 }

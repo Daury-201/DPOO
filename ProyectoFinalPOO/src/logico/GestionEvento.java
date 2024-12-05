@@ -13,7 +13,7 @@ public class GestionEvento implements Serializable {
     private ArrayList<Evento> misEventos;
     private ArrayList<Comision> misComisiones;
     private ArrayList<TrabajoCientifico> misTrabajos;
-    private ArrayList<Recurso>misRecursos;
+    private ArrayList<Recurso> misRecursos;
     private ArrayList<Usuario> usuarios; 
 
     public static int codEvento = 1;
@@ -101,9 +101,9 @@ public class GestionEvento implements Serializable {
         return usuarios;
     }
     
-	public ArrayList<Recurso> getMisRecursos() {
-		return misRecursos;
-	}
+    public ArrayList<Recurso> getMisRecursos() {
+        return misRecursos;
+    }
 
 
 	public void setMisRecursos(ArrayList<Recurso> misRecursos) {
