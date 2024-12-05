@@ -25,6 +25,8 @@ public  class Evento implements Serializable {
 		this.tipo = tipo;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
+		this.trabajosEvento = new ArrayList<>();
+		this.comisionesEvento = new ArrayList<>();
 	}
 	public String getIdEvento() {
 		return idEvento;

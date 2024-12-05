@@ -31,6 +31,8 @@ public class ListarEvento extends JDialog {
     private JButton btnEliminar;
     private JButton btnModificar;
     private Evento eventoSeleccionado = null;
+    private JButton btnNewButton;
+    private JButton btnNewButton_1;
 
     public ListarEvento() {
         setBounds(100, 100, 725, 455);
@@ -85,6 +87,34 @@ public class ListarEvento extends JDialog {
                 }
             }
         });
+        
+        btnNewButton = new JButton(" Comisiones");
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (eventoSeleccionado != null) {
+                    ListarComisionEvento listarComisiones = new ListarComisionEvento(eventoSeleccionado);
+                    listarComisiones.setModal(true);
+                    listarComisiones.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione un evento primero.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+        buttonPane.add(btnNewButton);
+        
+        btnNewButton_1 = new JButton("Trabajos");
+        btnNewButton_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (eventoSeleccionado != null) {
+                    ListarTrabajoEvento listarTrabajos = new ListarTrabajoEvento(eventoSeleccionado);
+                    listarTrabajos.setModal(true);
+                    listarTrabajos.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione un evento primero.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+        buttonPane.add(btnNewButton_1);
         buttonPane.add(btnModificar);
 
         btnEliminar = new JButton("Eliminar");
