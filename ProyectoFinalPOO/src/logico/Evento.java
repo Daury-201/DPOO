@@ -14,8 +14,8 @@ public class Evento implements Serializable {
     private String tipoEvento;
     private Date fechaInicio;
     private Date fechaFin;
-    private TrabajoCientifico trabajo; 
-    private Comision comision; 
+    private ArrayList<TrabajoCientifico> trabajosEvento;
+	private ArrayList<Comision>comisionesEvento;
     private ArrayList<Recurso> recursos; 
 
     public Evento(String idEvento, String nombre, String tipo, Date fechaInicio, Date fechaFin) {
@@ -24,8 +24,8 @@ public class Evento implements Serializable {
         this.tipo = tipo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        this.trabajo = null; 
-        this.comision = null; 
+        this.trabajosEvento = new ArrayList<>();
+		this.comisionesEvento = new ArrayList<>();
         this.recursos = new ArrayList<>(); 
     }
 
@@ -82,23 +82,6 @@ public class Evento implements Serializable {
 	}
 
 
-
-	public TrabajoCientifico getTrabajo() {
-        return trabajo;
-    }
-
-    public void setTrabajo(TrabajoCientifico trabajo) {
-        this.trabajo = trabajo;
-    }
-
-    public Comision getComision() {
-        return comision;
-    }
-
-    public void setComision(Comision comision) {
-        this.comision = comision;
-    }
-
     public ArrayList<Recurso> getRecursos() {
         return recursos;
     }
@@ -116,4 +99,28 @@ public class Evento implements Serializable {
     public void eliminarRecurso(Recurso recurso) {
         recursos.remove(recurso);
     }
+
+
+
+	public ArrayList<TrabajoCientifico> getTrabajosEvento() {
+		return trabajosEvento;
+	}
+
+
+
+	public void setTrabajosEvento(ArrayList<TrabajoCientifico> trabajosEvento) {
+		this.trabajosEvento = trabajosEvento;
+	}
+
+
+
+	public ArrayList<Comision> getComisionesEvento() {
+		return comisionesEvento;
+	}
+
+
+
+	public void setComisionesEvento(ArrayList<Comision> comisionesEvento) {
+		this.comisionesEvento = comisionesEvento;
+	}
 }

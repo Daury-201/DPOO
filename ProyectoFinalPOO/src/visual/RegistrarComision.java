@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -14,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import logico.Comision;
+import logico.Evento;
 import logico.GestionEvento;
 import logico.Jurado;
 import logico.TrabajoCientifico;
@@ -34,17 +36,17 @@ public class RegistrarComision extends JDialog {
     private Comision comisionSeleccionada;
     private JTextField txtIdComision;
     private JTextField txtNombreComision;
-    private JTextField txtArea;
+    private JComboBox<String> comboArea;
+    private JComboBox<String> comboEventos;
 
     public RegistrarComision(Comision comisionSeleccionada) {
         this.comisionSeleccionada = comisionSeleccionada;
-        setBounds(100, 100, 1000, 650);
+        setBounds(100, 100, 905, 700);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(null);
 
-        
         JLabel lblIdComision = new JLabel("ID Comisión:");
         lblIdComision.setBounds(10, 10, 100, 20);
         contentPanel.add(lblIdComision);
@@ -65,13 +67,20 @@ public class RegistrarComision extends JDialog {
         lblArea.setBounds(10, 70, 100, 20);
         contentPanel.add(lblArea);
 
-        txtArea = new JTextField();
-        txtArea.setBounds(120, 70, 200, 20);
-        contentPanel.add(txtArea);
+        comboArea = new JComboBox<>();
+        comboArea.setBounds(120, 70, 200, 20);
+        contentPanel.add(comboArea);
 
-        
+        JLabel lblEvento = new JLabel("Evento:");
+        lblEvento.setBounds(10, 100, 100, 20);
+        contentPanel.add(lblEvento);
+
+        comboEventos = new JComboBox<>();
+        comboEventos.setBounds(120, 100, 200, 20);
+        contentPanel.add(comboEventos);
+
         JScrollPane scrollPaneJurados = new JScrollPane();
-        scrollPaneJurados.setBounds(10, 100, 300, 200);
+        scrollPaneJurados.setBounds(10, 140, 300, 200);
         contentPanel.add(scrollPaneJurados);
 
         tableJurados = new JTable();
@@ -81,21 +90,18 @@ public class RegistrarComision extends JDialog {
         tableJurados.setModel(modeloJurados);
         scrollPaneJurados.setViewportView(tableJurados);
 
-        
         JButton btnAgregarJurado = new JButton("Agregar Jurado ->");
-        btnAgregarJurado.setBounds(320, 170, 150, 30);
+        btnAgregarJurado.setBounds(320, 200, 150, 30);
         btnAgregarJurado.addActionListener(e -> agregarJuradoSeleccionado());
         contentPanel.add(btnAgregarJurado);
 
-        
         JButton btnEliminarJurado = new JButton("Eliminar Jurado <-");
-        btnEliminarJurado.setBounds(320, 210, 150, 30);
+        btnEliminarJurado.setBounds(320, 240, 150, 30);
         btnEliminarJurado.addActionListener(e -> eliminarJuradoSeleccionado());
         contentPanel.add(btnEliminarJurado);
 
-        
         JScrollPane scrollPaneSeleccionados = new JScrollPane();
-        scrollPaneSeleccionados.setBounds(500, 100, 300, 200);
+        scrollPaneSeleccionados.setBounds(500, 140, 300, 200);
         contentPanel.add(scrollPaneSeleccionados);
 
         tableSeleccionados = new JTable();
@@ -105,13 +111,12 @@ public class RegistrarComision extends JDialog {
         tableSeleccionados.setModel(modeloSeleccionados);
         scrollPaneSeleccionados.setViewportView(tableSeleccionados);
 
-        
         JLabel lblTrabajos = new JLabel("Trabajos Científicos:");
-        lblTrabajos.setBounds(10, 310, 150, 20);
+        lblTrabajos.setBounds(10, 360, 150, 20);
         contentPanel.add(lblTrabajos);
 
         JScrollPane scrollPaneTrabajos = new JScrollPane();
-        scrollPaneTrabajos.setBounds(10, 340, 300, 200);
+        scrollPaneTrabajos.setBounds(10, 390, 300, 200);
         contentPanel.add(scrollPaneTrabajos);
 
         tableTrabajos = new JTable();
@@ -121,21 +126,18 @@ public class RegistrarComision extends JDialog {
         tableTrabajos.setModel(modeloTrabajos);
         scrollPaneTrabajos.setViewportView(tableTrabajos);
 
-        
         JButton btnAgregarTrabajo = new JButton("Agregar Trabajo ->");
-        btnAgregarTrabajo.setBounds(320, 410, 150, 30);
+        btnAgregarTrabajo.setBounds(320, 450, 150, 30);
         btnAgregarTrabajo.addActionListener(e -> agregarTrabajoSeleccionado());
         contentPanel.add(btnAgregarTrabajo);
 
-        
         JButton btnEliminarTrabajo = new JButton("Eliminar Trabajo <-");
-        btnEliminarTrabajo.setBounds(320, 450, 150, 30);
+        btnEliminarTrabajo.setBounds(320, 490, 150, 30);
         btnEliminarTrabajo.addActionListener(e -> eliminarTrabajoSeleccionado());
         contentPanel.add(btnEliminarTrabajo);
 
-        
         JScrollPane scrollPaneTrabajosSeleccionados = new JScrollPane();
-        scrollPaneTrabajosSeleccionados.setBounds(500, 340, 300, 200);
+        scrollPaneTrabajosSeleccionados.setBounds(500, 390, 300, 200);
         contentPanel.add(scrollPaneTrabajosSeleccionados);
 
         tableTrabajosSeleccionados = new JTable();
@@ -145,7 +147,6 @@ public class RegistrarComision extends JDialog {
         tableTrabajosSeleccionados.setModel(modeloTrabajosSeleccionados);
         scrollPaneTrabajosSeleccionados.setViewportView(tableTrabajosSeleccionados);
 
-        
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
         getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -159,7 +160,9 @@ public class RegistrarComision extends JDialog {
         buttonPane.add(btnCancelar);
 
         cargarJurados();
+        cargarAreas();
         cargarTrabajos();
+        cargarEventos();
         cargarDatosComision();
     }
 
@@ -171,6 +174,20 @@ public class RegistrarComision extends JDialog {
         }
     }
 
+    private void cargarAreas() {
+        comboArea.removeAllItems();
+        ArrayList<String> areas = new ArrayList<>();
+        for (TrabajoCientifico trabajo : GestionEvento.getInstance().getMisTrabajos()) {
+            String area = trabajo.getArea();
+            if (!areas.contains(area)) {
+                areas.add(area);
+            }
+        }
+        for (String area : areas) {
+            comboArea.addItem(area);
+        }
+    }
+
     private void cargarTrabajos() {
         modeloTrabajos.setRowCount(0);
         for (TrabajoCientifico trabajo : GestionEvento.getInstance().getMisTrabajos()) {
@@ -179,24 +196,19 @@ public class RegistrarComision extends JDialog {
         }
     }
 
+    private void cargarEventos() {
+        comboEventos.removeAllItems();
+        for (Evento evento : GestionEvento.getInstance().getMisEventos()) {
+            comboEventos.addItem(evento.getIdEvento() + " - " + evento.getNombre());
+        }
+    }
+
     private void cargarDatosComision() {
         if (comisionSeleccionada != null) {
             txtIdComision.setText(comisionSeleccionada.getIdComision());
             txtIdComision.setEditable(false);
             txtNombreComision.setText(comisionSeleccionada.getNombreComision());
-            txtArea.setText(comisionSeleccionada.getArea());
-
-            for (Jurado jurado : comisionSeleccionada.getJuradoComision()) {
-                juradosSeleccionados.add(jurado);
-                Object[] row = { jurado.getId(), jurado.getNombre(), jurado.getApellido(), jurado.getTelefono() };
-                modeloSeleccionados.addRow(row);
-            }
-
-            for (TrabajoCientifico trabajo : comisionSeleccionada.getTrabajosEvaluar()) {
-                trabajosSeleccionados.add(trabajo);
-                Object[] row = { trabajo.getId(), trabajo.getNombre(), trabajo.getArea() };
-                modeloTrabajosSeleccionados.addRow(row);
-            }
+            comboArea.setSelectedItem(comisionSeleccionada.getArea());
         }
     }
 
@@ -214,9 +226,6 @@ public class RegistrarComision extends JDialog {
                 JOptionPane.showMessageDialog(this, "El jurado ya está seleccionado.", "Advertencia",
                         JOptionPane.WARNING_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione un jurado para agregar.", "Advertencia",
-                    JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -229,9 +238,6 @@ public class RegistrarComision extends JDialog {
             Object[] row = { jurado.getId(), jurado.getNombre(), jurado.getApellido(), jurado.getTelefono() };
             modeloJurados.addRow(row);
             modeloSeleccionados.removeRow(selectedRow);
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione un jurado para eliminar.", "Advertencia",
-                    JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -249,9 +255,6 @@ public class RegistrarComision extends JDialog {
                 JOptionPane.showMessageDialog(this, "El trabajo ya está seleccionado.", "Advertencia",
                         JOptionPane.WARNING_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione un trabajo para agregar.", "Advertencia",
-                    JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -264,53 +267,61 @@ public class RegistrarComision extends JDialog {
             Object[] row = { trabajo.getId(), trabajo.getNombre(), trabajo.getArea() };
             modeloTrabajos.addRow(row);
             modeloTrabajosSeleccionados.removeRow(selectedRow);
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione un trabajo para eliminar.", "Advertencia",
-                    JOptionPane.WARNING_MESSAGE);
         }
     }
 
     private void guardarComision() {
         String id = txtIdComision.getText().trim();
         String nombre = txtNombreComision.getText().trim();
-        String area = txtArea.getText().trim();
+        String area = (String) comboArea.getSelectedItem();
+        String eventoSeleccionadoId = (String) comboEventos.getSelectedItem();
 
-        
-        if (id.isEmpty() || nombre.isEmpty() || area.isEmpty()) {
+        if (id.isEmpty() || nombre.isEmpty() || area.isEmpty() || eventoSeleccionadoId == null) {
             JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        
         if (juradosSeleccionados.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe asignar al menos un jurado a la comisión.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        
         if (trabajosSeleccionados.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe asignar al menos un trabajo científico a la comisión.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+        String[] eventoInfo = eventoSeleccionadoId.split(" - ");
+        String idEvento = eventoInfo[0];
+        Evento evento = GestionEvento.getInstance().buscarEventoPorId(idEvento);
+
+        if (evento == null) {
+            JOptionPane.showMessageDialog(this, "Evento seleccionado no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         if (comisionSeleccionada == null) {
-            // Crear nueva comisión
             Comision nuevaComision = new Comision(id, nombre, area);
             nuevaComision.setJuradoComision(juradosSeleccionados);
             nuevaComision.setTrabajosEvaluar(trabajosSeleccionados);
+
             GestionEvento.getInstance().agregarComision(nuevaComision);
+            evento.getComisionesEvento().add(nuevaComision);
             JOptionPane.showMessageDialog(this, "Comisión guardada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
-           
             comisionSeleccionada.setNombreComision(nombre);
             comisionSeleccionada.setArea(area);
             comisionSeleccionada.setJuradoComision(juradosSeleccionados);
             comisionSeleccionada.setTrabajosEvaluar(trabajosSeleccionados);
+
+            if (!evento.getComisionesEvento().contains(comisionSeleccionada)) {
+                evento.getComisionesEvento().add(comisionSeleccionada);
+            }
             JOptionPane.showMessageDialog(this, "Comisión actualizada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }
-        
-        GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
 
+        GestionEvento.getInstance().guardarDatos("gestionEvento.dat");
         dispose();
     }
+    
 }

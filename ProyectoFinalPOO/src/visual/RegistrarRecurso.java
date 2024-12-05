@@ -12,6 +12,8 @@ import logico.Recurso;
 import javax.swing.border.BevelBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,7 +21,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
-public class RegistrarRecurso extends JDialog {
+public class RegistrarRecurso extends JDialog implements Serializable {
 
     private final JPanel contentPanel = new JPanel();
     private JTextField txtIdRecurso;

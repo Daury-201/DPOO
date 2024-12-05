@@ -14,6 +14,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class Principal extends JFrame {
 
@@ -34,6 +36,7 @@ public class Principal extends JFrame {
     }
 
     public Principal() {
+    	setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\daury\\Downloads\\T-PXbTjT_400x400.jpg"));
         setTitle("Sistema de Gestión de Eventos Científicos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 782, 499);
@@ -175,6 +178,7 @@ public class Principal extends JFrame {
         menuRecursos.add(mntmNewMenuItem_1);
         
         JMenuItem itemGestionarRecursos = new JMenuItem("Gestionar");
+        itemGestionarRecursos.setIcon(new ImageIcon("C:\\Users\\daury\\Downloads\\T-PXbTjT_400x400.jpg"));
         itemGestionarRecursos.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		GestionarRecurso gestionar = new GestionarRecurso();
