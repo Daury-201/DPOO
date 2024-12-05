@@ -14,7 +14,7 @@ public class GestionEvento implements Serializable {
     private ArrayList<Comision> misComisiones;
     private ArrayList<TrabajoCientifico> misTrabajos;
     private ArrayList<Recurso> misRecursos;
-    private ArrayList<Usuario> usuarios; 
+   
 
     public static int codEvento = 1;
     public static int codComision = 1;
@@ -27,9 +27,7 @@ public class GestionEvento implements Serializable {
         misEventos = new ArrayList<>();
         misComisiones = new ArrayList<>();
         misTrabajos = new ArrayList<>();
-        usuarios = new ArrayList<>();
         misRecursos = new ArrayList<>();
-        cargarUsuariosPorDefecto();
     }
 
    
@@ -97,10 +95,6 @@ public class GestionEvento implements Serializable {
         this.misTrabajos = misTrabajos;
     }
 
-    public ArrayList<Usuario> getUsuarios() {
-        return usuarios;
-    }
-    
     public ArrayList<Recurso> getMisRecursos() {
         return misRecursos;
     }
@@ -110,28 +104,6 @@ public class GestionEvento implements Serializable {
 		this.misRecursos = misRecursos;
 	}
 
-    public void agregarUsuario(Usuario usuario) {
-        if (buscarUsuarioPorNombre(usuario.getNombre()) == null) {
-            usuarios.add(usuario);
-        }
-    }
-
-    public Usuario buscarUsuarioPorNombre(String nombre) {
-        for (Usuario usuario : usuarios) {
-            if (usuario.getNombre().equalsIgnoreCase(nombre)) {
-                return usuario;
-            }
-        }
-        return null;
-    }
-
-    private void cargarUsuariosPorDefecto() {
-        usuarios.add(new Usuario("admin", "1234", "Administrador"));
-        usuarios.add(new Usuario("autor", "password", "Autor"));
-        usuarios.add(new Usuario("lector", "1234", "Lector"));
-    }
-
-   
     public Comision buscarComisionPorId(String id) {
         for (Comision comision : misComisiones) {
             if (comision.getIdComision().equalsIgnoreCase(id)) {
