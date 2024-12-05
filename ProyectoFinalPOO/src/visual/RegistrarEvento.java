@@ -115,7 +115,7 @@ public class RegistrarEvento extends JDialog {
 			{
 				comboTipo = new JComboBox<Object>();
 				comboTipo.setModel(new DefaultComboBoxModel<Object>(new String[] {"Academico", "Artistico", "Deportivo", "Open Day"}));
-				comboTipo.setBounds(328, 86, 86, 23);
+				comboTipo.setBounds(296, 86, 118, 23);
 				panel.add(comboTipo);
 			}
 		}
@@ -136,8 +136,13 @@ public class RegistrarEvento extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.setActionCommand("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				buttonPane.add(cancelButton);
+				
 			}
 		}
 	}

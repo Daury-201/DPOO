@@ -13,6 +13,7 @@ public class GestionEvento implements Serializable {
     private ArrayList<Evento> misEventos;
     private ArrayList<Comision> misComisiones;
     private ArrayList<TrabajoCientifico> misTrabajos;
+    private ArrayList<Recurso>misRecursos;
     private ArrayList<Usuario> usuarios; 
 
     public static int codEvento = 1;
@@ -27,6 +28,7 @@ public class GestionEvento implements Serializable {
         misComisiones = new ArrayList<>();
         misTrabajos = new ArrayList<>();
         usuarios = new ArrayList<>();
+        misRecursos = new ArrayList<>();
         cargarUsuariosPorDefecto();
     }
 
@@ -98,6 +100,15 @@ public class GestionEvento implements Serializable {
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
+    
+	public ArrayList<Recurso> getMisRecursos() {
+		return misRecursos;
+	}
+
+
+	public void setMisRecursos(ArrayList<Recurso> misRecursos) {
+		this.misRecursos = misRecursos;
+	}
 
     public void agregarUsuario(Usuario usuario) {
         if (buscarUsuarioPorNombre(usuario.getNombre()) == null) {
@@ -223,9 +234,29 @@ public class GestionEvento implements Serializable {
         }
     }
     
+    public Recurso buscarRecursoPorId(String idRecurso) {
+        for (Recurso recurso : getMisRecursos()) {
+            if (recurso.getIdRecurso().equalsIgnoreCase(idRecurso)) {
+                return recurso;
+            }
+        }
+        return null;
+    }
+    
+    public void agregarRecurso(Recurso recurso) {
+        if (!misRecursos.contains(recurso)) {
+            misRecursos.add(recurso);
+        }
+    }
+    
+
+    
     public void insertarEvento(Evento s1) {
         misEventos.add(s1);
        codEvento++;
     }
 
+  
 }
+
+

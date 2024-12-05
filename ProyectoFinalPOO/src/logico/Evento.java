@@ -17,6 +17,7 @@ public  class Evento implements Serializable {
 	private Date fechaFin;
 	private ArrayList<TrabajoCientifico> trabajosEvento;
 	private ArrayList<Comision>comisionesEvento;
+
 	
 	public Evento(String idEvento, String nombre, String tipo, Date fechaInicio, Date fechaFin) {
 		super();
@@ -27,7 +28,9 @@ public  class Evento implements Serializable {
 		this.fechaFin = fechaFin;
 		this.trabajosEvento = new ArrayList<>();
 		this.comisionesEvento = new ArrayList<>();
+
 	}
+	
 	public String getIdEvento() {
 		return idEvento;
 	}
@@ -70,4 +73,6 @@ public  class Evento implements Serializable {
 	public void setComisionesEvento(ArrayList<Comision> comisionesEvento) {
 		this.comisionesEvento = comisionesEvento;
 	}
+
+	
 }

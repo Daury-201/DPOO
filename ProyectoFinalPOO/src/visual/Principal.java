@@ -161,17 +161,33 @@ public class Principal extends JFrame {
         JMenu menuRecursos = new JMenu("Recursos");
         menuBar.add(menuRecursos);
 
+        
+        JMenuItem mntmNewMenuItem_1 = new JMenuItem("Agregar Recurso");
+        mntmNewMenuItem_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		RegistrarRecurso registrar = new RegistrarRecurso(null);
+        		registrar.setModal(true);
+                registrar.setLocationRelativeTo(null);
+                registrar.setVisible(true);
+        				
+        	}
+        });
+        menuRecursos.add(mntmNewMenuItem_1);
+        
         JMenuItem itemGestionarRecursos = new JMenuItem("Gestionar");
         itemGestionarRecursos.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                
-                GestionarRecursos gestionar = new GestionarRecursos();
-                gestionar.setModal(true);
-                gestionar.setLocationRelativeTo(null);
-                gestionar.setVisible(true);
-            }
+        	public void actionPerformed(ActionEvent e) {
+        		GestionarRecurso gestionar = new GestionarRecurso();
+        		gestionar.setModal(true);
+        		gestionar.setLocationRelativeTo(null);
+        		gestionar.setVisible(true);
+        		
+        	}
         });
+       
         menuRecursos.add(itemGestionarRecursos);
+        
+
 
         
         JMenu menuPlanificacion = new JMenu("Eventos");
